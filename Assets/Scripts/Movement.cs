@@ -6,40 +6,48 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MonoBehaviour
 {
+    // Unity components and objects
     private Rigidbody rb;
     [SerializeField] private Camera camera;
+    
+    // General player control parameters
     [SerializeField] private float speed = 10f;
     [SerializeField] private float gravityRotationSpeed = 10f;
     [SerializeField] private float sensitivity = 5f;
     [SerializeField] private float turnSpeed = 300f;
-    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float jumpForce = 30f;
+    
+    // Normal-to-the-ground movement
     [SerializeField] private Transform[] groundChecks;
     [SerializeField] private LayerMask groundLayer;
+    private Vector3 groundNormal;  // ground normal vector which player is standing
     
-    
+    // General player control inputs
     private Vector3 verticalMovement;
     private Vector3 horizontalMovement;
     private float verticalRot;
     private float horizontalRot;
+
+    // Flags
+    private bool isGrounded;
     
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        groundNormal = transform.up;
     }
 
     private void Update()
     {
-        // get inputs
+        // Receive player inputs
         verticalMovement = Input.GetAxis("Vertical") * transform.forward;
         horizontalMovement = Input.GetAxis("Horizontal") * transform.right;
         verticalRot -= Input.GetAxis("Mouse Y") * sensitivity;
         horizontalRot = Input.GetAxis("Mouse X") * turnSpeed;
 
-        RotateCamera();
-        RotateSelf();
-        ProcessNormalMovement();
-        
+        // Keydown events
         if (Input.GetButtonDown("Jump"))
         {
             rb.AddForce(jumpForce * transform.up, ForceMode.Impulse);
@@ -49,60 +57,72 @@ public class Movement : MonoBehaviour
             ReloadLevel();
         }
         
+        // Process player inputs
+        RotateCamera(verticalRot);
+        RotateSelf(horizontalRot);
+        
+        // Normal-to-the-ground orientation
+        NormalOrientation();
+
     }
     
     private void FixedUpdate()
     {
-        TranslateSelf();
-    }
-    private void RotateCamera()
-    {
-        verticalRot = Mathf.Clamp(verticalRot, -60f, 60f);
-        camera.transform.localRotation = Quaternion.Euler(verticalRot, 0, 0);
-    }
-    private void TranslateSelf()
-    {
         Vector3 moveDir = (verticalMovement + horizontalMovement).normalized;
-        rb.MovePosition(transform.position + Time.fixedDeltaTime * speed * moveDir);
+        TranslateSelf(moveDir);
+    }
+    private void RotateCamera(float xAngle)
+    {
+        xAngle = Mathf.Clamp(xAngle, -60f, 60f);
+        camera.transform.localRotation = Quaternion.Euler(xAngle, 0, 0);
+    }
+    private void TranslateSelf(Vector3 direction)
+    {
+        rb.MovePosition(transform.position + Time.fixedDeltaTime * speed * direction);
     }
 
-    private void RotateSelf()
+    private void RotateSelf(float yAngle)
     {
-        transform.Rotate(0, horizontalRot * Time.deltaTime, 0);
+        transform.Rotate(0, yAngle * Time.deltaTime, 0);
     }
 
-    private void ProcessNormalMovement()
+    private void NormalOrientation()
     {
-        NormalizeOrientation();
-
+        SetGroundNormal();  // update ground normal vector
+        LerpUpRotate(groundNormal, gravityRotationSpeed);  // rotate, so the character is normal to the ground
+        GroundPulling();
+    }
+    
+    private void SetGroundNormal()
+    {
+        float maxRayDistance = 10f;
+        RaycastHit hit;
+        for (int i = 0; i < groundChecks.Length; i++)
+        {
+            Vector3 origin = groundChecks[i].position;
+            Vector3 direction = -groundChecks[i].transform.up;
+            if (Physics.Raycast(origin, direction, out hit, maxRayDistance, groundLayer))
+            {
+                groundNormal += hit.normal;
+            }
+        }
+        groundNormal = groundNormal.normalized;
+    }
+    
+    private void LerpUpRotate(Vector3 targetDir, float lerpSpeed)
+    {
+        Vector3 currentDir = transform.up;
+        Vector3 lerpDir = Vector3.Lerp(currentDir, targetDir, Time.deltaTime * lerpSpeed);
+        transform.rotation = Quaternion.FromToRotation(currentDir, lerpDir) * transform.rotation;
+    }
+    
+    private void GroundPulling()
+    {
         // TODO: Fix ground pulling, setting velocity is bad
-        Vector3 groundNormal = GetGroundNormal();
         Vector3 currentVelocity = rb.velocity;
-        Vector3 targetVelocity = -groundNormal * 10f;
+        Vector3 groundPullVelocity = -9.8f * groundNormal;
+        Vector3 targetVelocity = currentVelocity + groundPullVelocity;
         rb.velocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * 10f);
-    }
-
-    private void NormalizeOrientation()
-    {
-        Vector3 groundNormal = GetGroundNormal();
-        Vector3 lerpDir = Vector3.Lerp(transform.up, groundNormal, Time.deltaTime * gravityRotationSpeed);
-        transform.rotation = Quaternion.FromToRotation(transform.up, lerpDir) * transform.rotation;
-    }
-
-    private Vector3 GetGroundNormal()
-    {
-        RaycastHit hitFront;
-        RaycastHit hitCentre;
-        RaycastHit hitBack;
-        Physics.Raycast(groundChecks[0].position, -groundChecks[0].transform.up, out hitFront, 10f, groundLayer);
-        Physics.Raycast(groundChecks[1].position, -groundChecks[1].transform.up, out hitCentre, 10f, groundLayer);
-        Physics.Raycast(groundChecks[2].position, -groundChecks[2].transform.up, out hitBack, 10f, groundLayer);
-
-        Vector3 hitDir = transform.up;
-        if (hitFront.transform is not null) { hitDir += hitFront.normal; }
-        if (hitCentre.transform is not null) { hitDir += hitCentre.normal; }
-        if (hitBack.transform is not null) { hitDir += hitBack.normal; }
-        return hitDir.normalized;
     }
 
     private void ReloadLevel()
