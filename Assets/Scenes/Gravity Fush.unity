@@ -227,22 +227,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 386685208, guid: 9239394787b90fc4986b152d5775297c, type: 3}
-      propertyPath: jumpForce
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 386685208, guid: 9239394787b90fc4986b152d5775297c, type: 3}
-      propertyPath: turnSpeed
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 386685208, guid: 9239394787b90fc4986b152d5775297c, type: 3}
-      propertyPath: sensitivity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 386685208, guid: 9239394787b90fc4986b152d5775297c, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 347944885335017124, guid: 9239394787b90fc4986b152d5775297c, type: 3}
       propertyPath: m_Name
       value: Player
