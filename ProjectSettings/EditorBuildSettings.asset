@@ -8,4 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gravity Fush.unity
     guid: 415b5e032b5334845ad70e993f282991
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: a6f782d26a61e7545b277c8a910988bc, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: fcda3a374fb621047a2129826d24d743, type: 2}
