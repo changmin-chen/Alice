@@ -18436,6 +18436,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7995007382270222866, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f0bb7c7f0bfb2943bdce5930449225e, type: 2}
+    - target: {fileID: 7995007382358688608, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
+      propertyPath: HMDRotatesPlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
       propertyPath: m_RootOrder
       value: 5
