@@ -56,6 +56,8 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 
 	void StickMovement()
 	{
+		//TODO change "ort" and "moveDir" base on "groundNormal"
+		
 		Quaternion ort = CameraRig.centerEyeAnchor.rotation;
 		Vector3 ortEuler = ort.eulerAngles;
 		ortEuler.z = ortEuler.x = 0f;
@@ -66,7 +68,8 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 		moveDir += ort * (primaryAxis.x * Vector3.right);
 		moveDir += ort * (primaryAxis.y * Vector3.forward);
 		//_rigidbody.MovePosition(_rigidbody.transform.position + moveDir * Speed * Time.fixedDeltaTime);
-		_rigidbody.MovePosition(_rigidbody.position + moveDir * Speed * Time.fixedDeltaTime);
+		//_rigidbody.MovePosition(_rigidbody.position + moveDir * Speed * Time.fixedDeltaTime);
+		_rigidbody.AddForce(moveDir * 10f, ForceMode.Impulse);
 	}
 
 	void SnapTurn()
