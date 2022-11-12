@@ -15,6 +15,9 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 
 	private bool ReadyToSnapTurn;
 	private Rigidbody _rigidbody;
+	
+	private Quaternion prevHMDRot;
+	private Quaternion currentHMDRot;
 
 	public event Action CameraUpdated;
 	public event Action PreCharacterMove;
@@ -27,16 +30,19 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 
 	void Start ()
 	{
-		
+		prevHMDRot = CameraRig.centerEyeAnchor.rotation;
+		currentHMDRot = prevHMDRot;
 	}
-	
+
 	private void FixedUpdate()
 	{
         if (CameraUpdated != null) CameraUpdated();
         if (PreCharacterMove != null) PreCharacterMove();
 
-        if (HMDRotatesPlayer) RotatePlayerToHMD();
-		if (EnableLinearMovement) StickMovement();
+        //if (HMDRotatesPlayer) RotatePlayerToHMD();
+        //if (EnableLinearMovement) StickMovement();
+        if (HMDRotatesPlayer) SoftRotatePlayerToHMD();
+        if (EnableLinearMovement) StickNormalMovement();
 		if (EnableRotation) SnapTurn();
 	}
 
@@ -54,10 +60,8 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 		root.rotation = prevRot;
     }
 
-	void StickMovement()
+    void StickMovement()
 	{
-		//TODO change "ort" and "moveDir" base on "groundNormal"
-		
 		Quaternion ort = CameraRig.centerEyeAnchor.rotation;
 		Vector3 ortEuler = ort.eulerAngles;
 		ortEuler.z = ortEuler.x = 0f;
@@ -68,8 +72,45 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 		moveDir += ort * (primaryAxis.x * Vector3.right);
 		moveDir += ort * (primaryAxis.y * Vector3.forward);
 		//_rigidbody.MovePosition(_rigidbody.transform.position + moveDir * Speed * Time.fixedDeltaTime);
-		//_rigidbody.MovePosition(_rigidbody.position + moveDir * Speed * Time.fixedDeltaTime);
-		_rigidbody.AddForce(moveDir * 10f, ForceMode.Impulse);
+		_rigidbody.MovePosition(_rigidbody.position + moveDir * Speed * Time.fixedDeltaTime);
+	}
+    
+   
+    void SoftRotatePlayerToHMD()
+    {
+	    Transform root = CameraRig.trackingSpace;
+	    Transform centerEye = CameraRig.centerEyeAnchor;
+
+	    Vector3 prevPos = root.position;
+	    Quaternion prevRot = root.rotation;
+
+	    // apply soft rotation to character
+	    currentHMDRot = centerEye.rotation;
+	    Quaternion delta = currentHMDRot * Quaternion.Inverse(prevHMDRot);
+	    Debug.Log("centerEyeAnchor" + currentHMDRot.eulerAngles);  //TODO rotation of hmd failed, less than expected 
+	    transform.rotation = delta * transform.rotation;
+	    prevHMDRot = currentHMDRot;
+
+	    root.position = prevPos;
+	    root.rotation = prevRot;
+    }
+	void StickNormalMovement()
+	{
+		//TODO change "ort" and "moveDir" base on "groundNormal"
+		
+		Quaternion ort = CameraRig.centerEyeAnchor.rotation;
+		Vector3 ortEuler = ort.eulerAngles;
+		ortEuler.z = ortEuler.x = 0f;
+		ort = Quaternion.Euler(ortEuler);
+
+		Vector3 moveDir = Vector3.zero;
+		Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+		moveDir += primaryAxis.x * transform.right;
+		moveDir += primaryAxis.y * transform.forward;
+
+		_rigidbody.freezeRotation = false;
+		_rigidbody.AddForce(moveDir * 8f, ForceMode.Impulse);
+		_rigidbody.freezeRotation = true;
 	}
 
 	void SnapTurn()
