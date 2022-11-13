@@ -90,7 +90,7 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 	    Quaternion localPrevHMDRot = q * prevHMDRot;
 	    Quaternion localDelta = localCurrentHMDRot * Quaternion.Inverse(localPrevHMDRot);
 	    Vector3 localDeltaEuler = localDelta.eulerAngles;
-	    Debug.Log("local delta euler: " + localDeltaEuler);
+	    //Debug.Log("local delta euler: " + localDeltaEuler);
 	    transform.Rotate(0f, localDeltaEuler.y, 0f);
 	    
 	    prevHMDRot = currentHMDRot;
@@ -99,8 +99,6 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
     }
 	void StickNormalMovement()
 	{
-		//TODO change "ort" and "moveDir" base on "groundNormal"
-		
 		Quaternion ort = CameraRig.centerEyeAnchor.rotation;
 		Vector3 ortEuler = ort.eulerAngles;
 		ortEuler.z = ortEuler.x = 0f;
@@ -110,6 +108,8 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 		Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
 		moveDir += primaryAxis.x * transform.right;
 		moveDir += primaryAxis.y * transform.forward;
+		Debug.Log("transform-right" + transform.right);
+		Debug.Log("transform-forward" + transform.forward);
 
 		_rigidbody.AddForce(moveDir * 8f, ForceMode.Impulse);
 
