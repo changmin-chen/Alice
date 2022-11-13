@@ -33,12 +33,12 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 		prevHMDRot = CameraRig.centerEyeAnchor.rotation;
 		currentHMDRot = prevHMDRot;
 	}
-
+	
 	private void FixedUpdate()
 	{
-        if (CameraUpdated != null) CameraUpdated();
+		if (CameraUpdated != null) CameraUpdated();
         if (PreCharacterMove != null) PreCharacterMove();
-
+        
         //if (HMDRotatesPlayer) RotatePlayerToHMD();
         //if (EnableLinearMovement) StickMovement();
         if (HMDRotatesPlayer) SoftRotatePlayerToHMD();
@@ -83,14 +83,17 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 
 	    Vector3 prevPos = root.position;
 	    Quaternion prevRot = root.rotation;
-
-	    // apply soft rotation to character
+	    
 	    currentHMDRot = centerEye.rotation;
-	    Quaternion delta = currentHMDRot * Quaternion.Inverse(prevHMDRot);
-	    Debug.Log("centerEyeAnchor" + currentHMDRot.eulerAngles);  //TODO rotation of hmd failed, less than expected 
-	    transform.rotation = delta * transform.rotation;
+	    Quaternion q = Quaternion.Inverse(centerEye.rotation);  // world-to-local quaternion
+	    Quaternion localCurrentHMDRot = q * currentHMDRot;
+	    Quaternion localPrevHMDRot = q * prevHMDRot;
+	    Quaternion localDelta = localCurrentHMDRot * Quaternion.Inverse(localPrevHMDRot);
+	    Vector3 localDeltaEuler = localDelta.eulerAngles;
+	    Debug.Log("local delta euler: " + localDeltaEuler);
+	    transform.Rotate(0f, localDeltaEuler.y, 0f);
+	    
 	    prevHMDRot = currentHMDRot;
-
 	    root.position = prevPos;
 	    root.rotation = prevRot;
     }
@@ -108,9 +111,8 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 		moveDir += primaryAxis.x * transform.right;
 		moveDir += primaryAxis.y * transform.forward;
 
-		_rigidbody.freezeRotation = false;
 		_rigidbody.AddForce(moveDir * 8f, ForceMode.Impulse);
-		_rigidbody.freezeRotation = true;
+
 	}
 
 	void SnapTurn()

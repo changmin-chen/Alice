@@ -805,6 +805,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2759649014876004446, guid: 005b717e5f0c4a34b94d05132afcdd02, type: 3}
   m_PrefabInstance: {fileID: 74310727}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &74840698 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7995007381930611875, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
+  m_PrefabInstance: {fileID: 3075179039661965962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &77186084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18436,6 +18447,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3075179040623928191, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
+      propertyPath: CameraRig
+      value: 
+      objectReference: {fileID: 74840698}
     - target: {fileID: 7995007382270222866, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
