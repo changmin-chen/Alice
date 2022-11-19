@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grass Wall Long
+  m_Name: Maze Box Ceiling
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
   - _METALLICSPECGLOSSMAP
@@ -27,11 +27,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 7bd79d20df321b948bb5e514d71b5c5c, type: 3}
-        m_Scale: {x: 4, y: 8}
+        m_Texture: {fileID: 2800000, guid: aab75f2d41f2a6341b46f37a7855ca0b, type: 3}
+        m_Scale: {x: 15, y: 8}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 8ac4bfa50143a3b418d3056b822cc1f7, type: 3}
+        m_Texture: {fileID: 2800000, guid: ededee44f860c0e4a80d0e0ff1a1abb4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -48,22 +48,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 4, y: 8}
+        m_Scale: {x: 3, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 7bd79d20df321b948bb5e514d71b5c5c, type: 3}
-        m_Scale: {x: 4, y: 8}
+        m_Texture: {fileID: 2800000, guid: aab75f2d41f2a6341b46f37a7855ca0b, type: 3}
+        m_Scale: {x: 15, y: 8}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 85a7cd387cbe5ae46bccd5e70eef4ffa, type: 3}
+        m_Texture: {fileID: 2800000, guid: fffa1826558173e479201dd80459bb99, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: ae151da01f343354d80b8ef8523bd3cc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9119d192feb2089428cfacf64fea7719, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 0d5551c47b30140479c2157c9ce754e8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4ae37d2999f91da4ea9f0517219874c8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -86,7 +86,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
-    - _BumpScale: 1
+    - _BumpScale: 40
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -104,7 +104,7 @@ Material:
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 1
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -118,7 +118,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &3022679505683553238
+--- !u!114 &4946540219606122387
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
