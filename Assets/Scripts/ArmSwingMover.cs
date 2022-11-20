@@ -50,6 +50,7 @@ public class ArmSwingMover : MonoBehaviour
         
         // Add them up to get the handSpeed from the user minus the movement of the player to neglect the movement of the player from the
         HandSpeed = (leftHandDistanceMoved - playerDistanceMoved) + (rightHandDistanceMoved - playerDistanceMoved);
+        Debug.Log("hand speed = " + HandSpeed);
 
         if (Time.timeSinceLevelLoad > 1f)
         {
