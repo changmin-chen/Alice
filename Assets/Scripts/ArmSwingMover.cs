@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,9 +22,17 @@ public class ArmSwingMover : MonoBehaviour
     // Speed
     public float Speed = 70;
     private float HandSpeed;
+    [SerializeField] private float HandSpeedThreshold = 0.01f;
+
+    private Rigidbody _rigidbody;
+    
+    // CameraRig
+    public OVRCameraRig CameraRig;
     
     void Start()
     {
+        _rigidbody = GetComponent<Rigidbody>();
+        
         // Set original PreviousFrame positions at start up
         PlayerPositionPreviousFrame = transform.position;
         PositionPreviousFrameLeftHand = LeftHand.transform.position;
@@ -52,15 +61,19 @@ public class ArmSwingMover : MonoBehaviour
         HandSpeed = (leftHandDistanceMoved - playerDistanceMoved) + (rightHandDistanceMoved - playerDistanceMoved);
         Debug.Log("hand speed = " + HandSpeed);
 
-        if (Time.timeSinceLevelLoad > 1f)
-        {
-            transform.position += HandSpeed * Speed * Time.deltaTime * ForwardDirection.transform.forward;
-        }
-        
         // Set previous position of hand for the next frame
         PositionPreviousFrameLeftHand = PositionThisFrameLeftHand;
         PositionPreviousFrameRightHand = PositionThisFrameRightHand;
         // Set the player position previous frame
         PlayerPositionPreviousFrame = PlayerPositionThisFrame;
+    }
+
+    private void FixedUpdate()
+    {
+        if (Time.timeSinceLevelLoad > 1f  && HandSpeed > HandSpeedThreshold)
+        {
+            Vector3 moveDir = ForwardDirection.transform.forward;
+            _rigidbody.velocity = Speed  * Time.fixedDeltaTime * moveDir;
+        }
     }
 }
