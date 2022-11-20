@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SimpleCapsuleWithStickMovement : MonoBehaviour
 {
@@ -18,6 +19,16 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 	
 	private Quaternion prevHMDRot;
 	private Quaternion currentHMDRot;
+	
+	// Arm-Swing Movement
+	[SerializeField] private GameObject _leftHand;
+	[SerializeField] private GameObject _rightHand;
+	private Vector3 _positionPreviousFrameLeftHand;
+	private Vector3 _positionPreviousFrameRightHand;
+	private Vector3 _playerPositionPreviousFrame;
+	private Vector3 _positionThisFrameLeftHand;
+	private Vector3 _positionThisFrameRightHand;
+	private Vector3 _playerPositionThisFrame;
 
 	public event Action CameraUpdated;
 	public event Action PreCharacterMove;
@@ -32,6 +43,11 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 	{
 		prevHMDRot = CameraRig.centerEyeAnchor.rotation;
 		currentHMDRot = prevHMDRot;
+		
+		// ArmSwingMove: Set original PreviousFrame positions at start up
+		_playerPositionPreviousFrame = transform.position;
+		_positionPreviousFrameLeftHand = _leftHand.transform.position;
+		_positionPreviousFrameRightHand = _rightHand.transform.position;
 	}
 	
 	private void FixedUpdate()
@@ -99,20 +115,21 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
     }
 	void StickNormalMovement()
 	{
-		Quaternion ort = CameraRig.centerEyeAnchor.rotation;
-		Vector3 ortEuler = ort.eulerAngles;
-		ortEuler.z = ortEuler.x = 0f;
-		ort = Quaternion.Euler(ortEuler);
-
 		Vector3 moveDir = Vector3.zero;
 		Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
 		moveDir += primaryAxis.x * transform.right;
 		moveDir += primaryAxis.y * transform.forward;
-		Debug.Log("transform-right" + transform.right);
-		Debug.Log("transform-forward" + transform.forward);
-
-		_rigidbody.AddForce(moveDir * 8f, ForceMode.Impulse);
-
+		moveDir = moveDir.normalized;
+		_rigidbody.AddForce(moveDir * 10f, ForceMode.Impulse);
+	}
+	
+	void ArmSwingMovement()
+	{
+		//float yRotation = CameraRig.transform.eulerAngles.y;
+		
+		// Get current position of hands
+		_positionThisFrameLeftHand = _leftHand.transform.position;
+		_positionThisFrameRightHand = _rightHand.transform.position;
 	}
 
 	void SnapTurn()
