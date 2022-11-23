@@ -6,7 +6,6 @@ using UnityEngine;
 public class GroundNormalRotater : MonoBehaviour
 {
     private Rigidbody _rigidbody;
-    private Transform _transform;
 
     // Normal-to-the-ground movement
     [SerializeField] private float gravityRotationSpeed = 10f;
@@ -17,7 +16,6 @@ public class GroundNormalRotater : MonoBehaviour
     void Start()
     {
         _rigidbody = transform.root.GetComponent<Rigidbody>();
-        _transform = transform.root;
         _rigidbody.useGravity = false;
     }
 
@@ -50,7 +48,6 @@ public class GroundNormalRotater : MonoBehaviour
     {
         Vector3 currentDir = transform.up;
         Vector3 lerpDir = Vector3.Lerp(currentDir, targetDir, Time.deltaTime * lerpSpeed);
-       // _transform.rotation = Quaternion.FromToRotation(currentDir, lerpDir) * _transform.rotation;
         _rigidbody.MoveRotation(Quaternion.FromToRotation(currentDir, lerpDir) * _rigidbody.rotation);
     }
     

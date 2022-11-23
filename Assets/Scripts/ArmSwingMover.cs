@@ -41,11 +41,8 @@ public class ArmSwingMover : MonoBehaviour
         }
     }
 
-    
     private void FixedUpdate()
     {
-        //RotatePlayerToHMD();
-        
         // Get current position of the camera, left and right hands
         _currentPositionLeft = LeftHand.PointerPose.position;
         _currentPositionRight = RightHand.PointerPose.position;
@@ -63,25 +60,35 @@ public class ArmSwingMover : MonoBehaviour
 
         if (Time.timeSinceLevelLoad < 1f) return;
         
-        Quaternion ort = CameraRig.centerEyeAnchor.rotation;
-        Vector3 ortEuler = ort.eulerAngles;
-        ortEuler.z = ortEuler.x = 0f;
-        ort = Quaternion.Euler(ortEuler);
+
+        if (_rigidbody.velocity.sqrMagnitude > 0.01f)
+        {
+            DragMovement();
+        }
         
         // Move the player
-        Vector3 moveDir = ort * Vector3.forward;
+        var moveDir = GetForwardDirection();
         if (_handSpeed > handSpeedThreshold)
         {
             _rigidbody.velocity = speed * moveDir;
         }
 
-        if (_rigidbody.velocity.sqrMagnitude > 0.01f)
-        {
-            Vector3 dragDir = - _rigidbody.velocity;
-            _rigidbody.AddForce(dragForce * dragDir, ForceMode.Acceleration);
-        }
+
     }
-    
+
+    private Vector3 GetForwardDirection()
+    {
+        Vector3 cameraRight = CameraRig.centerEyeAnchor.right;
+        Vector3 playerUpward = transform.up;
+        return Vector3.Cross(cameraRight, playerUpward);
+    }
+    private void DragMovement()
+    {
+        Vector3 dragDir = -_rigidbody.velocity;
+        _rigidbody.AddForce(dragForce * dragDir, ForceMode.Acceleration);
+    }
+
+
     private void ReloadLevel()
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;
