@@ -17,9 +17,9 @@ public class ArmSwingMover : MonoBehaviour
     private Vector3 _currentPositionRight;
 
     // Speed
-    [SerializeField] private float speed = 0.5f;
-    [SerializeField] private float handSpeedThreshold = 0.5f;
-    [SerializeField] private float dragForce = 5f;
+    [SerializeField] private float speed;
+    [SerializeField] private float handSpeedThreshold;
+    [SerializeField] private float dragForce;
     private float _handSpeed;
     private Rigidbody _rigidbody;
     
@@ -72,12 +72,13 @@ public class ArmSwingMover : MonoBehaviour
         Vector3 moveDir = ort * Vector3.forward;
         if (_handSpeed > handSpeedThreshold)
         {
-            _rigidbody.velocity = 1f * moveDir;
+            _rigidbody.velocity = speed * moveDir;
         }
 
         if (_rigidbody.velocity.sqrMagnitude > 0.01f)
         {
-            _rigidbody.AddForce(dragForce * _rigidbody.velocity, ForceMode.Acceleration);
+            Vector3 dragDir = - _rigidbody.velocity;
+            _rigidbody.AddForce(dragForce * dragDir, ForceMode.Acceleration);
         }
     }
     
