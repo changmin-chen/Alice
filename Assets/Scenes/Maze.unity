@@ -21623,44 +21623,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1789345283902910784, guid: 7468ba9aed43cb541b96a63bda0ec002, type: 3}
   m_PrefabInstance: {fileID: 635058642}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &637138541 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7995007381483790967, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-  m_PrefabInstance: {fileID: 3075179039661965962}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &637138543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637138541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
 --- !u!1001 &642155053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30062,44 +30024,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5219382262119732520, guid: 30ee4b1be5cc59542ae173c361c9aa2b, type: 3}
   m_PrefabInstance: {fileID: 1974166079}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1003207470 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7995007382201157166, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-  m_PrefabInstance: {fileID: 3075179039661965962}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1003207472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003207470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
 --- !u!1001 &1004693163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60637,71 +60561,6 @@ Transform:
   m_Father: {fileID: 7079690332789821774}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3075179039661965962
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7995007382270222866, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.265
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.64
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.00000037252897
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688609, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688635, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_Name
-      value: PlayerWalkOnWallController
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995007382358688635, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b978818aeb9d1af4ba42ac4357944939, type: 3}
 --- !u!1001 &3597954127035363049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61822,7 +61681,7 @@ Transform:
   - {fileID: 7079690332789816798}
   - {fileID: 8934703130497252156}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &7079690332789875870
 Transform:

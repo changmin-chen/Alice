@@ -19,16 +19,11 @@ public class ArmSwingMover : MonoBehaviour
     // Speed
     [SerializeField] private float speed = 0.5f;
     [SerializeField] private float handSpeedThreshold = 0.5f;
+    [SerializeField] private float dragForce = 5f;
     private float _handSpeed;
     private Rigidbody _rigidbody;
-    [SerializeField] private float dragForce = 5f; 
     
-    // CameraRig
-    private Quaternion prevHMDRot;
-    private Quaternion currentHMDRot;
-    private Vector3 _forwardDirection;
 
-    
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -77,16 +72,12 @@ public class ArmSwingMover : MonoBehaviour
         Vector3 moveDir = ort * Vector3.forward;
         if (_handSpeed > handSpeedThreshold)
         {
-            //if (_rigidbody.velocity.magnitude > 10f) return;
-            //_rigidbody.AddForce(speed * _handSpeed * moveDir);
             _rigidbody.velocity = 1f * moveDir;
         }
-        else
+
+        if (_rigidbody.velocity.sqrMagnitude > 0.01f)
         {
-            float velocityMag = Mathf.Abs(_rigidbody.velocity.x) + MathF.Abs(_rigidbody.velocity.z);
-            if (velocityMag < 0.1f) return;
-            Vector3 dragDir = -moveDir;
-            _rigidbody.AddForce(dragForce * dragDir);
+            _rigidbody.AddForce(dragForce * _rigidbody.velocity, ForceMode.Acceleration);
         }
     }
     
