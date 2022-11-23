@@ -10,8 +10,8 @@ public class CameraRigConstraints : MonoBehaviour
     {
         initialCenterEyeLocalPosition = CameraRig.centerEyeAnchor.transform.localPosition;
     }
-    
-    void LateUpdate()
+
+    void Update()
     {
         // Fix the relative position of the CameraRig
         CameraRig.centerEyeAnchor.transform.localPosition = initialCenterEyeLocalPosition;
