@@ -12,6 +12,9 @@ public class GroundNormalRotater : MonoBehaviour
     [SerializeField] private Transform[] groundChecks;
     [SerializeField] private LayerMask groundLayer;
     private Vector3 groundNormal;  // ground normal vector which player is standing
+
+    public OVRCameraRig CameraRig;
+    [SerializeField] private bool isRotaterFollowCamera;
     
     void Start()
     {
@@ -21,9 +24,16 @@ public class GroundNormalRotater : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isRotaterFollowCamera) RotaterFollowCamera();  // TODO the function is buggy
         SetGroundNormal();  // update ground normal vector
         StandOnGroundRotation(groundNormal, gravityRotationSpeed);  // rotate, so the character is normal to the ground
         GroundPulling();  // using attraction force from the ground, instead of using gravity
+    }
+
+    private void RotaterFollowCamera()
+    {
+        Quaternion rot = CameraRig.centerEyeAnchor.rotation;
+        transform.rotation = rot;
     }
 
     private void SetGroundNormal()
@@ -53,11 +63,7 @@ public class GroundNormalRotater : MonoBehaviour
     
     private void GroundPulling()
     {
-        // Vector3 currentVelocity = _rigidbody.velocity;
-        // Vector3 groundPullVelocity = - groundNormal;
-        // Vector3 targetVelocity = currentVelocity + groundPullVelocity;
-        // _rigidbody.velocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * 10f);
-        
-        _rigidbody.AddForce(Time.fixedDeltaTime * -groundNormal, ForceMode.Acceleration);
+        Vector3 groundPullDir = -groundNormal;
+        _rigidbody.AddForce(Time.fixedDeltaTime * groundPullDir, ForceMode.Acceleration);
     }
 }
