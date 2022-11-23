@@ -271,6 +271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &381555621 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3147695994657599299, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
+  m_PrefabInstance: {fileID: 3147695993714889318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &566400911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -396,6 +401,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2875268522287397597, guid: 5f611a36d70d46a4ba7f1233f9c4444e, type: 3}
   m_PrefabInstance: {fileID: 566400911}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1071531947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3147695993696972710, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
+  m_PrefabInstance: {fileID: 3147695993714889318}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1071531949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071531947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a64df0685849be44b2666c0fd5e5297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraRig: {fileID: 227100408}
+  rotationSpeed: 5
+  groundChecks:
+  - {fileID: 2012047992}
+  - {fileID: 381555621}
+  - {fileID: 1308327704}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundPullForce: 20
 --- !u!1001 &1130025555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -476,6 +508,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2606bf2f0c914a7aba4390f29ba2eb6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1308327704 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3147695994693527098, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
+  m_PrefabInstance: {fileID: 3147695993714889318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1390733942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1342,6 +1379,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a823fe55a7107c04abd21f4ede9425b3, type: 3}
+--- !u!4 &2012047992 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3147695994808064764, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
+  m_PrefabInstance: {fileID: 3147695993714889318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2064165941861145318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1537,8 +1579,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3147695993696972710, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
+      propertyPath: m_Name
+      value: GroundNormalRotator
+      objectReference: {fileID: 0}
+    - target: {fileID: 3147695993696972710, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5327406572164934723, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
       propertyPath: speed
@@ -1546,7 +1592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5327406572164934723, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
       propertyPath: dragForce
-      value: 0.1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5327406572164934723, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
       propertyPath: handSpeedThreshold
@@ -1582,7 +1628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5327406572165330682, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.216
+      value: 0.485
       objectReference: {fileID: 0}
     - target: {fileID: 5327406572165330682, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1620,5 +1666,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3147695993696972708, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}

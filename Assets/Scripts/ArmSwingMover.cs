@@ -16,6 +16,7 @@ public class ArmSwingMover : MonoBehaviour
     private Vector3 _previousLocalPositionRight;
     private Vector3 _currentLocalPositionLeft;
     private Vector3 _currentLocalPositionRight;
+    private Vector3 _forwardDirection;
     
     [SerializeField] private float speed;
     [SerializeField] private float handMovingThreshold;
@@ -54,12 +55,16 @@ public class ArmSwingMover : MonoBehaviour
 
     private bool IsDragging()
     {
-        return _rigidbody.velocity.sqrMagnitude > 0f;
+        Vector3 worldVelocity = _rigidbody.velocity;
+        Vector3 localVelocity = _rigidbody.transform.InverseTransformVector(worldVelocity);
+        var localHorizontalSpeed = Mathf.Abs(localVelocity.x * localVelocity.z);
+        return localHorizontalSpeed > Mathf.Epsilon * Mathf.Epsilon;
     }
+    
     private void DragMovement()
     {
-        Vector3 dragDir = -_rigidbody.velocity;
-        _rigidbody.AddForce(dragForce * dragDir, ForceMode.Acceleration);
+        Vector3 dragDir = - _rigidbody.velocity;
+        _rigidbody.AddForce(Time.fixedDeltaTime * dragForce * dragDir, ForceMode.Acceleration);
     }
 
     private bool IsArmSwinging()
@@ -82,10 +87,10 @@ public class ArmSwingMover : MonoBehaviour
         // Get the forward direction bases on the direction the player is looking at
         Vector3 cameraRight = CameraRig.centerEyeAnchor.right;
         Vector3 playerUpward = transform.up;
-        Vector3 moveDir = Vector3.Cross(cameraRight, playerUpward);
+        _forwardDirection = Vector3.Cross(cameraRight, playerUpward);
         
         // Move player by setting the constant speed
-        _rigidbody.velocity = speed * moveDir;
+        _rigidbody.velocity = speed * _forwardDirection;
     }
 
     private void ReloadLevel()
