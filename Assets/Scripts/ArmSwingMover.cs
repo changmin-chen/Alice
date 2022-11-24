@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using Unity.Mathematics;
 
 public class ArmSwingMover : MonoBehaviour
 {
@@ -16,11 +18,20 @@ public class ArmSwingMover : MonoBehaviour
     private Vector3 _previousLocalPositionRight;
     private Vector3 _currentLocalPositionLeft;
     private Vector3 _currentLocalPositionRight;
+    private float _handSpeedLeft;
+    private float _handSpeedRight;
     private Vector3 _forwardDirection;
     
     [SerializeField] private float speed;
     [SerializeField] private float handMovingThreshold;
     [SerializeField] private float dragForce;
+    public enum MovingMode
+    {
+        ConstantSpeed,
+        DynamicSpeed
+    }
+
+    public MovingMode movingMode = MovingMode.ConstantSpeed;
    
     void Start()
     {
@@ -71,10 +82,12 @@ public class ArmSwingMover : MonoBehaviour
     {
         Vector3 localPositionMovedLeft = _currentLocalPositionLeft - _previousLocalPositionLeft;
         Vector3 localPositionMovedRight = _currentLocalPositionRight - _previousLocalPositionRight;
+        _handSpeedLeft = Mathf.Abs(localPositionMovedLeft.y);
+        _handSpeedRight = Mathf.Abs(localPositionMovedRight.y);
         
         // Magnitude Check
-        bool isLeftHandMoving = Mathf.Abs(localPositionMovedLeft.y) > handMovingThreshold;
-        bool isRightHandMoving = Mathf.Abs(localPositionMovedRight.y) > handMovingThreshold;
+        bool isLeftHandMoving = _handSpeedLeft > handMovingThreshold;
+        bool isRightHandMoving = _handSpeedRight > handMovingThreshold;
         
         // Direction Check
         bool isReverseDirection = localPositionMovedLeft.y * localPositionMovedRight.y < 0f;
@@ -89,8 +102,18 @@ public class ArmSwingMover : MonoBehaviour
         Vector3 playerUpward = transform.up;
         _forwardDirection = Vector3.Cross(cameraRight, playerUpward);
         
-        // Move player by setting the constant speed
-        _rigidbody.velocity = speed * _forwardDirection;
+        // Move player base on the hand speed and the selected moving mode
+        switch (movingMode)
+        {
+            case (MovingMode.ConstantSpeed):
+                _rigidbody.velocity = speed * _forwardDirection;
+                break;
+            case (MovingMode.DynamicSpeed):
+                float handSpeed = (_handSpeedLeft + _handSpeedRight) / 2f;
+                _rigidbody.AddForce(handSpeed * speed * 200f * _forwardDirection);
+                break;
+        }
+
     }
 
     private void ReloadLevel()
