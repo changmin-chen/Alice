@@ -13,13 +13,13 @@ public class GroundNormalRotator : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private Transform[] groundChecks;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float groundPullForce;
+    [SerializeField] private float gravityForce;
     
     void Start()
     {
         _rigidbody = transform.root.GetComponent<Rigidbody>();
-        _rigidbody.useGravity = false;
         _groundNormalVector = transform.up;
+        Physics.gravity = - gravityForce * _groundNormalVector;
     }
 
     private void FixedUpdate()
@@ -27,7 +27,7 @@ public class GroundNormalRotator : MonoBehaviour
         FollowCameraRotation();  // detect the wall which is in-front-of the player
         SetGroundNormal();  // update the normal vector of the ground
         StandOnGroundRotation();  // rotate, so the character is normal to the ground
-        GroundPulling();  // using attraction force from the ground, instead of using gravity
+        SetGravityDirection();  // setting the gravity direction in physics engine to the reverse direction of the ground normal vector 
     }
 
     private void FollowCameraRotation()
@@ -60,10 +60,10 @@ public class GroundNormalRotator : MonoBehaviour
         targetDir = Vector3.Lerp(currentDir, targetDir, Time.fixedDeltaTime * rotationSpeed);
         _rigidbody.MoveRotation(Quaternion.FromToRotation(currentDir, targetDir) * _rigidbody.rotation);
     }
-    
-    private void GroundPulling()
+
+    private void SetGravityDirection()
     {
-        Vector3 groundPullDir = - _groundNormalVector;
-        _rigidbody.AddForce(Time.fixedDeltaTime * groundPullForce * groundPullDir, ForceMode.Acceleration);
+        Vector3 gravityDirection = -_groundNormalVector;
+        Physics.gravity = gravityForce * gravityDirection;
     }
 }

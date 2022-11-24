@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 51873420}
   - component: {fileID: 51873419}
   m_Layer: 0
-  m_Name: PoseDebugCube (2)
+  m_Name: PoseDebugCubeCustom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,7 +221,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &69201888 stripped
 MonoBehaviour:
@@ -723,6 +723,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f7cfb1f9629da4494ac0840f3a3cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &686889672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3147695993696972710, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
+  m_PrefabInstance: {fileID: 3147695993714889318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &958358569 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7810559199111839008, guid: 48779c4e9105c1d4c986f52958bba9a3, type: 3}
@@ -838,7 +843,7 @@ GameObject:
   - component: {fileID: 1313288225}
   - component: {fileID: 1313288224}
   m_Layer: 0
-  m_Name: PoseDebugCube
+  m_Name: PoseDebugCubeUnity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -871,6 +876,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 686889672}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
   _whenUnselected:
     m_PersistentCalls:
@@ -970,7 +987,7 @@ GameObject:
   - component: {fileID: 1617602092}
   - component: {fileID: 1617602091}
   m_Layer: 0
-  m_Name: PoseDebugCube (3)
+  m_Name: PoseDebugCubeCustom (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1070,7 +1087,7 @@ GameObject:
   - component: {fileID: 1700349626}
   - component: {fileID: 1700349625}
   m_Layer: 0
-  m_Name: PoseDebugCube (1)
+  m_Name: PoseDebugCubeUnity (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1182,7 +1199,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2105888642 stripped
 MonoBehaviour:
@@ -1342,9 +1359,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1071531949, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
+      propertyPath: gravityForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3147695993696972710, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327406572164934723, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5327406572164934723, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
       propertyPath: dragForce
-      value: 150
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 5327406572164934723, guid: 4f40c6f601497154595d754f44a90cd4, type: 3}
       propertyPath: movingMode
