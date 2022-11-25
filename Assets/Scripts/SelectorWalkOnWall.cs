@@ -18,6 +18,7 @@
  * limitations under the License.
  */
 
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Serialization;
@@ -30,42 +31,25 @@ namespace Oculus.Interaction
         private MonoBehaviour _selector;
 
         [SerializeField]
-        private Renderer _renderer;
+        private Renderer _rendererLeftHand;
+        
+        [SerializeField]
+        private Renderer _rendererRightHand;
 
         [SerializeField]
-        private Color _normalColor = Color.red;
+        private Material _materialWhenUnselected;
+        
+        [SerializeField]
+        private Material _materialWhenSelected;
 
         [SerializeField]
-        private Color _selectColor = Color.green;
-
-        public Color NormalColor
-        {
-            get
-            {
-                return _normalColor;
-            }
-            set
-            {
-                _normalColor = value;
-            }
-        }
-
-        public Color SelectColor
-        {
-            get
-            {
-                return _selectColor;
-            }
-            set
-            {
-                _selectColor = value;
-            }
-        }
+        private GroundNormalRotator _groundNormalRotator;
+        
 
         private ISelector Selector;
         private Material _material;
         private bool _selected = false;
-
+        
         protected bool _started = false;
 
         protected virtual void Awake()
@@ -78,9 +62,8 @@ namespace Oculus.Interaction
             this.BeginStart(ref _started);
             Assert.IsNotNull(Selector);
 
-            Assert.IsNotNull(_renderer);
-            _material = _renderer.material;
-            _material.color = _normalColor;
+            Assert.IsNotNull(_rendererRightHand);
+            _rendererRightHand.material = _materialWhenUnselected;
             this.EndStart(ref _started);
         }
 
@@ -113,8 +96,12 @@ namespace Oculus.Interaction
             if (_selected) return;
             _selected = true;
 
-            _material.color = _selectColor;
+            // Handle material
+            _rendererLeftHand.material = _materialWhenSelected;
+            _rendererRightHand.material = _materialWhenSelected;
+
             // Custom functions here
+            _groundNormalRotator.gameObject.SetActive(true);
 
         }
         private void HandleUnselected()
@@ -122,7 +109,10 @@ namespace Oculus.Interaction
             if (!_selected) return;
             _selected = false;
 
-            _material.color = _normalColor;
+            // Handle material
+            //_rendererLeftHand.material = _materialWhenUnselected;
+            //_rendererRightHand.material = _materialWhenUnselected;
+
             // Custom functions here
 
         }
@@ -143,7 +133,7 @@ namespace Oculus.Interaction
 
         public void InjectRenderer(Renderer renderer)
         {
-            _renderer = renderer;
+            _rendererRightHand = renderer;
         }
 
         #endregion
