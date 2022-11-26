@@ -80,7 +80,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3147695993696972711
 Transform:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  groundPullForce: 20
+  gravityForce: 9
 --- !u!1 &3147695994317778931
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 3147695993861323134}
   m_Layer: 0
   m_Name: LeftEyeAnchor
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -581,7 +581,7 @@ GameObject:
   - component: {fileID: 5327406572164934723}
   m_Layer: 0
   m_Name: OVRArmSwingCameraRig
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -746,9 +746,10 @@ MonoBehaviour:
   LeftHand: {fileID: 3870655946314322882}
   RightHand: {fileID: 1138464125395535482}
   CameraRig: {fileID: 5327406572154199860}
-  speed: 1.5
+  speed: 3
   handMovingThreshold: 0.01
-  dragForce: 100
+  dragForce: 0
+  movingMode: 0
 --- !u!1 &5327406572164967132
 GameObject:
   m_ObjectHideFlags: 0
