@@ -25,7 +25,7 @@ using UnityEngine.Serialization;
 
 namespace Oculus.Interaction
 {
-    public class SelectorWalkOnWall : MonoBehaviour
+    public class SelectorCustomEventWrapper : MonoBehaviour
     {
         [SerializeField, Interface(typeof(ISelector))]
         private MonoBehaviour _selector;
@@ -51,6 +51,10 @@ namespace Oculus.Interaction
         private bool _selected = false;
         
         protected bool _started = false;
+
+        [SerializeField]
+        private ActionOnTimer _actionOnTimer;
+
 
         protected virtual void Awake()
         {
@@ -95,26 +99,27 @@ namespace Oculus.Interaction
         {
             if (_selected) return;
             _selected = true;
-
-            // Handle material
-            _rendererLeftHand.material = _materialWhenSelected;
-            _rendererRightHand.material = _materialWhenSelected;
+            
 
             // Custom functions here
-            _groundNormalRotator.gameObject.SetActive(true);
-
+            _actionOnTimer.SetTimer(3.0f, SelectedTimingCallBack);  // when "selected" event begin, count down and execute callback while timer elapsed 
+            
         }
         private void HandleUnselected()
         {
             if (!_selected) return;
             _selected = false;
-
-            // Handle material
-            //_rendererLeftHand.material = _materialWhenUnselected;
-            //_rendererRightHand.material = _materialWhenUnselected;
-
+            
             // Custom functions here
+            _actionOnTimer.CancelTimer();  // cancel timer if the "selected" event didn't prolong for enough time
 
+        }
+        
+        private void SelectedTimingCallBack()
+        {
+            _rendererLeftHand.material = _materialWhenSelected;
+            _rendererRightHand.material = _materialWhenSelected;
+            _groundNormalRotator.gameObject.SetActive(true); 
         }
 
         #region Inject

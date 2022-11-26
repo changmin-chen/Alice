@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundNormalRotatorHandler : MonoBehaviour
+public class TriggerCubeHandler : MonoBehaviour
 {
     public GroundNormalRotator GroundNormalRotator;
     
