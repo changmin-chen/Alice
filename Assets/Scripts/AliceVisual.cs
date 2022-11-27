@@ -5,35 +5,28 @@ using UnityEngine;
 
 public class AliceVisual : MonoBehaviour
 {
-    public OVRManager Manager;
     public OVRCameraRig CameraRig;
+    private Transform _transformReference;
+    private Vector3 _localPositionOffset;
 
-    [SerializeField] private Transform[] childTransforms;
-    private List<Vector3> _initialLocalRotationEulers = new List<Vector3>();
-
-    void Awake()
+    private void Awake()
     {
-        Manager.usePositionTracking = false;
+        _localPositionOffset = transform.localPosition;
     }
+
 
     private void Start()
     {
-        for (int i = 0; i < childTransforms.Length; ++i)
-        {
-            Vector3 initialRotationEuler = childTransforms[i].localRotation.eulerAngles;
-            _initialLocalRotationEulers.Add(initialRotationEuler);
-        }
+        _transformReference = CameraRig.centerEyeAnchor.transform;
     }
 
 
     void Update()
     {
-        Vector3 cameraRotationEuler = CameraRig.centerEyeAnchor.localRotation.eulerAngles;
-        for (int i = 0; i < childTransforms.Length; ++i)
-        {
-            Vector3 initialRotationEuler = _initialLocalRotationEulers[i];
-            Vector3 newRotationEuler = cameraRotationEuler + initialRotationEuler;
-            childTransforms[i].localRotation = Quaternion.Euler(initialRotationEuler.x, newRotationEuler.y, initialRotationEuler.z);
-        }
+        Vector3 localRotationRef = _transformReference.localRotation.eulerAngles;
+        transform.localRotation = Quaternion.Euler(0f, localRotationRef.y, 0f);
+
+        Vector3 localPositionRef = _transformReference.localPosition;
+        transform.localPosition = localPositionRef + _localPositionOffset;
     }
 }
