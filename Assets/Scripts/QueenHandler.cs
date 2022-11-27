@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 
-public class QueenFollowPlayer : MonoBehaviour
+public class QueenHandler : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent _navMeshAgent;
 
     [SerializeField] private Transform _player;
+    
 
     private void Awake()
     {
@@ -25,4 +27,5 @@ public class QueenFollowPlayer : MonoBehaviour
     {
         _navMeshAgent.SetDestination(_player.position);
     }
+    
 }

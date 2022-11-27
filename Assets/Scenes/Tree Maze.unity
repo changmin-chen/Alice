@@ -731,6 +731,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 76599d447a61ce64ca2ac4ab50d69e7a, type: 3}
+      propertyPath: m_TagString
+      value: Queen
+      objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: 76599d447a61ce64ca2ac4ab50d69e7a, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.56
@@ -1374,7 +1378,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7249580453272523217, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
       propertyPath: m_Name
-      value: TiggerCube (1)
+      value: Checkpoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249580453272523217, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
+      propertyPath: m_TagString
+      value: Checkpoint
       objectReference: {fileID: 0}
     - target: {fileID: 9102510460210627831, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
       propertyPath: RendererLeftHand
@@ -1388,7 +1396,8 @@ PrefabInstance:
       propertyPath: GroundNormalRotator
       value: 
       objectReference: {fileID: 3147695992696313291}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9102510460210627831, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
 --- !u!1 &1077077587
 GameObject:
@@ -1680,7 +1689,7 @@ NavMeshAgent:
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 100
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 1.81
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1708,6 +1717,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &1258765119
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258765114}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.65
+  m_Height: 1.65
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &1295002026 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5598423577652438831, guid: 2f94427b8dd14ea498fd92aee3ec9f0f, type: 3}
@@ -1960,8 +1983,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1593944972}
   m_Layer: 0
-  m_Name: TriggerCubes
-  m_TagString: Untagged
+  m_Name: Checkpoints
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2072,7 +2095,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7249580453272523217, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
       propertyPath: m_Name
-      value: TiggerCube (3)
+      value: Checkpoint (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249580453272523217, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
+      propertyPath: m_TagString
+      value: Checkpoint
       objectReference: {fileID: 0}
     - target: {fileID: 9102510460210627831, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
       propertyPath: RendererLeftHand
@@ -2086,7 +2113,8 @@ PrefabInstance:
       propertyPath: GroundNormalRotator
       value: 
       objectReference: {fileID: 3147695992696313291}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9102510460210627831, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
 --- !u!4 &1716468692 stripped
 Transform:
@@ -2281,7 +2309,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7249580453272523217, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
       propertyPath: m_Name
-      value: TiggerCube (2)
+      value: Checkpoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249580453272523217, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
+      propertyPath: m_TagString
+      value: Checkpoint
       objectReference: {fileID: 0}
     - target: {fileID: 9102510460210627831, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
       propertyPath: RendererLeftHand
@@ -2295,7 +2327,8 @@ PrefabInstance:
       propertyPath: GroundNormalRotator
       value: 
       objectReference: {fileID: 3147695992696313291}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9102510460210627831, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
 --- !u!1 &2017751537
 GameObject:
@@ -7369,10 +7402,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1593944972}
     m_Modifications:
-    - target: {fileID: 5910024293442255422, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6797476453395588162, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -7419,20 +7448,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7249580453272523217, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
       propertyPath: m_Name
-      value: TiggerCube
+      value: Checkpoint
       objectReference: {fileID: 0}
-    - target: {fileID: 9102510460210627831, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
-      propertyPath: RendererLeftHand
-      value: 
-      objectReference: {fileID: 884313631}
-    - target: {fileID: 9102510460210627831, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
-      propertyPath: RendererRightHand
-      value: 
-      objectReference: {fileID: 2025332068}
-    - target: {fileID: 9102510460210627831, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
-      propertyPath: GroundNormalRotator
-      value: 
-      objectReference: {fileID: 3147695992696313291}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2cd8b9e56300814dba31e571684b059, type: 3}
 --- !u!114 &1615113573477936463
@@ -8717,6 +8734,7 @@ GameObject:
   - component: {fileID: 7079690332789751329}
   - component: {fileID: 7079690332789751332}
   - component: {fileID: 7079690332789751333}
+  - component: {fileID: 7194126627537672733}
   m_Layer: 0
   m_Name: OVRArmSwingCameraRig
   m_TagString: Player
@@ -9063,6 +9081,22 @@ MonoBehaviour:
   resetHmdPoseByMiddleMouseButton: 1
   activateKeys: 3201000031010000
   pitchKeys: 3401000033010000
+--- !u!114 &7194126627537672733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7079690332789717180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c89eef68d883ed48877d4857c469095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelLoadDelay: 2
+  _groundNormalRotator: {fileID: 3147695992696313291}
+  _rendererLeftHand: {fileID: 884313631}
+  _rendererRightHand: {fileID: 2025332068}
 --- !u!4 &7613073338471865156
 Transform:
   m_ObjectHideFlags: 0
