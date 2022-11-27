@@ -12,14 +12,8 @@ public class AliceVisual : MonoBehaviour
     private void Awake()
     {
         _localPositionOffset = transform.localPosition;
-    }
-
-
-    private void Start()
-    {
         _transformReference = CameraRig.centerEyeAnchor.transform;
     }
-
 
     void Update()
     {
