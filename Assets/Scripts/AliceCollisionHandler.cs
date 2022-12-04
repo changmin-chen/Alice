@@ -33,7 +33,7 @@ public class AliceCollisionHandler : MonoBehaviour
     {
         if (other.gameObject.tag == "Queen")
         {
-            StartQueenCatchAliceSequence();
+            //StartQueenCatchAliceSequence();
         }
     }
 
@@ -50,7 +50,7 @@ public class AliceCollisionHandler : MonoBehaviour
     private void StartQueenCatchAliceSequence()
     {
         GetComponent<ArmSwingMover>().enabled = false;
-        ReloadLevel();
+        Invoke(nameof(ReloadLevel), _levelLoadDelay);
         RecoverGravityDirection();
     }
 
