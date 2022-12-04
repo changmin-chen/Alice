@@ -9,6 +9,9 @@ ModelImporter:
   - first:
       74: -1401818351571238730
     second: Queen run. wave hand
+  - first:
+      74: 5796277590089543191
+    second: Queen run. wave hand (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -79,7 +82,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
