@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,15 +8,8 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Animator _transition;
     private float transitionTime = 1f;
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            LoadNextLevel();
-        }
-    }
 
-    private void LoadNextLevel()
+    public void LoadNextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
