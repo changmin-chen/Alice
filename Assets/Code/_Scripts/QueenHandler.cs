@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Oculus.Interaction.Input;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,15 +16,29 @@ public class QueenHandler : MonoBehaviour
     [SerializeField] private Transform _target;
     [SerializeField] private ParticleSystem _teleportParticle;
     
+    // Hashes for animation
     private int _isRunningHash;
+    private int _isDeadHash;
+
+    // Queen will kill butterflies
+    private List<BreadButterfly> _aliveButterflies;
+    [SerializeField] private float _killButterfliesDistance = 5.0f;
 
 
     IEnumerator Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-        _isRunningHash = Animator.StringToHash("isRunning");
         _teleportParticle.Stop();
+        _isRunningHash = Animator.StringToHash("isRunning");
+
+        // Collecting butterflies to be killed
+        _aliveButterflies = new List<BreadButterfly>();
+        GameObject[] tmp = GameObject.FindGameObjectsWithTag("Killable");
+        foreach (var butterflyObj in tmp)
+        {
+            _aliveButterflies.Add(butterflyObj.GetComponent<BreadButterfly>());
+        }
 
         // Movement for crossing nav mesh link
         _agent.autoTraverseOffMeshLink = false;
@@ -40,6 +55,7 @@ public class QueenHandler : MonoBehaviour
         }
     }
     
+
     void Update()
     {
         // The target who the queen will chase
@@ -56,6 +72,19 @@ public class QueenHandler : MonoBehaviour
         if (isRunning && !HasVelocity())
         {
             _animator.SetBool(_isRunningHash, false);
+        }
+        
+        // Killing butterflies
+        if (_aliveButterflies.Count == 0) return;
+        for (int i = _aliveButterflies.Count - 1; i >= 0; i--)
+        {
+            BreadButterfly butterfly = _aliveButterflies[i];
+            if (Vector3.Distance(transform.position, butterfly.BonePosition) < _killButterfliesDistance)
+            {
+                butterfly.Kill();
+                _aliveButterflies.RemoveAt(i);
+            }
+            Debug.Log("alive num: " + _aliveButterflies.Count);
         }
     }
     
