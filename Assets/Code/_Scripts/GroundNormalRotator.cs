@@ -38,7 +38,7 @@ public class GroundNormalRotator : MonoBehaviour
 
     private void SetGroundNormal()
     {
-        const float maxRayDistance = 5f;
+        const float maxRayDistance = 3f;
         _groundNormalVector = Vector3.zero;
 
         foreach (var groundCheck in groundChecks)
