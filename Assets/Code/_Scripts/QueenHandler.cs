@@ -24,11 +24,17 @@ public class QueenHandler : MonoBehaviour
     private List<BreadButterfly> _aliveButterflies;
     [SerializeField] private float _killButterfliesDistance = 5.0f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip _queenIdleAudio;
+    private AudioSource _audioSource;
+
 
     IEnumerator Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.loop = false;
         _teleportParticle.Stop();
         _isRunningHash = Animator.StringToHash("isRunning");
 
@@ -72,6 +78,11 @@ public class QueenHandler : MonoBehaviour
         if (isRunning && !HasVelocity())
         {
             _animator.SetBool(_isRunningHash, false);
+
+            if (!_audioSource.isPlaying)
+            {
+                _audioSource.PlayOneShot(_queenIdleAudio);
+            }
         }
         
         // Killing butterflies
@@ -84,7 +95,6 @@ public class QueenHandler : MonoBehaviour
                 butterfly.Kill();
                 _aliveButterflies.RemoveAt(i);
             }
-            Debug.Log("alive num: " + _aliveButterflies.Count);
         }
     }
     

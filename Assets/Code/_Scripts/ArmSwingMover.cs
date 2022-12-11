@@ -13,6 +13,7 @@ public class ArmSwingMover : MonoBehaviour
     public OVRHand RightHand;
     public OVRCameraRig CameraRig;
     private Rigidbody _rigidbody;
+
     
     private Vector3 _previousLocalPositionLeft;
     private Vector3 _previousLocalPositionRight;
@@ -25,17 +26,22 @@ public class ArmSwingMover : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float handMovingThreshold;
     [SerializeField] private float dragForce;
+
     public enum MovingMode
     {
         ConstantSpeed,
         DynamicSpeed
     }
-
     public MovingMode movingMode = MovingMode.ConstantSpeed;
-   
+    
+    [Header("Audio")]
+    [SerializeField] private AudioClip _footStepAudio;
+    private AudioSource _audioSource;
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _audioSource = GetComponent<AudioSource>();
         
         // Set original PreviousFrame positions at start up
         _previousLocalPositionLeft = LeftHand.PointerPose.position;
@@ -49,7 +55,7 @@ public class ArmSwingMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Time.timeSinceLevelLoad < 1f) return;
+        if (Time.timeSinceLevelLoad < 2.0f) return;
         
         // Get current position of the camera, left and right hands
         _currentLocalPositionLeft = LeftHand.PointerPose.position;
@@ -57,7 +63,19 @@ public class ArmSwingMover : MonoBehaviour
 
         // Handle arm swinging movement    
         if (IsDragging()) DragMovement();
-        if (IsArmSwinging()) MovePlayer();
+        if (IsArmSwinging())
+        {
+            MovePlayer();
+            if (!_audioSource.isPlaying)
+            {
+                _audioSource.PlayOneShot(_footStepAudio);
+            }
+        }
+
+        if (_rigidbody.velocity.sqrMagnitude < 0.01f)
+        {
+            _audioSource.Stop();
+        }
 
         // Set previous position of the camera, left and right hands
         _previousLocalPositionLeft = _currentLocalPositionLeft;
